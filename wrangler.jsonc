@@ -1,0 +1,41 @@
+/**
+ * Cloudflare Workers configuration for yfinance MCP Server
+ * Documentation: https://developers.cloudflare.com/workers/wrangler/configuration/
+ */
+{
+  "name": "yfinance-mcp",
+  "type": "service",
+  "main": "src/index.ts",
+  "compatibility_date": "2024-12-16",
+  "compatibility_flags": ["nodejs_compat"],
+
+  "env": {
+    "production": {
+      "routes": [
+        {
+          "pattern": "yfinance-mcp.workers.dev/*",
+          "zone_name": "workers.dev"
+        }
+      ]
+    }
+  },
+
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "MCP_AGENT",
+        "class_name": "YahooMcpServer",
+        "script_name": "yfinance-mcp"
+      }
+    ]
+  },
+
+  "migrations": [
+    {
+      "tag": "v1",
+      "new_classes": ["YahooMcpServer"]
+    }
+  ],
+
+  "env_fallthrough": "service"
+}
