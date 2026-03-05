@@ -33,7 +33,7 @@
   "migrations": [
     {
       "tag": "v1",
-      "new_classes": ["YahooMcpServer"]
+      "new_sqlite_classes": ["YahooMcpServer"]
     }
   ],
 
